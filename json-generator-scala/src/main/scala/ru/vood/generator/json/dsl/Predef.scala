@@ -1,11 +1,14 @@
 package ru.vood.generator.json.dsl
 
-import ru.vood.generator.json.service.FunConst.{GenerateFieldValueFunction, NameField}
 import ru.vood.generator.json.service._
 
 import scala.collection.immutable
 
 object Predef {
+
+  type NameField = String
+
+  type GenerateFieldValueFunction[ID_TYPE, OUT_TYPE] = (ID_TYPE, NameField) => OUT_TYPE
 
   implicit final class ArrowAssoc(private val self: String) extends AnyVal {
     //    def →[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, DataType]): MetaProperty[ID_TYPE] = withFun(y)

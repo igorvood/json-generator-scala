@@ -1,7 +1,6 @@
 package ru.vood.generator.json.somemodel
 
-import ru.vood.generator.json.dsl.Predef.ArrowAssoc
-import ru.vood.generator.json.service.FunConst.NameField
+import ru.vood.generator.json.dsl.Predef.{ArrowAssoc, NameField}
 import ru.vood.generator.json.service._
 
 case class DslJsonMeta(name: String) extends JsonEntityMeta[String] {

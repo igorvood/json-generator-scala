@@ -1,7 +1,6 @@
 package ru.vood.generator.json.somemodel
 
-import ru.vood.generator.json.dsl.Predef.ArrowAssoc
-import ru.vood.generator.json.service.FunConst.NameField
+import ru.vood.generator.json.dsl.Predef.{ArrowAssoc, NameField}
 import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty, NumberType, StringType}
 
 import java.math.MathContext
@@ -28,9 +27,8 @@ case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
     "dsl_str_1 " asDataType[String] { (v1: String, v2: NameField) => StringType("true") }
 
   )
-//  val dasd = "asdad " withFun[String] { (v1: String, v2: NameField) => StringType("true") }
-//  private val value = "asdad " withFun { (v1: String, v2: NameField) => "true" }
-
+  //  val dasd = "asdad " withFun[String] { (v1: String, v2: NameField) => StringType("true") }
+  //  private val value = "asdad " withFun { (v1: String, v2: NameField) => "true" }
 
 
 }
