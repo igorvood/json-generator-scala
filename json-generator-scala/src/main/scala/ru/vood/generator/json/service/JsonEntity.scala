@@ -40,7 +40,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
   }
 
   private def badFields = fields
-    .groupBy(k => k.name)
+    .groupBy(k => k.nameField)
     .map(q => (q._1, q._2.size))
     .filter(q => q._2 > 1)
 

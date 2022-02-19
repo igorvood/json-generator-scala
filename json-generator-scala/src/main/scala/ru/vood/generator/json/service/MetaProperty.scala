@@ -1,12 +1,12 @@
 package ru.vood.generator.json.service
 
-import ru.vood.generator.json.dsl.Predef.GenerateFieldValueFunction
+import ru.vood.generator.json.dsl.Predef.{GenerateFieldValueFunction, NameField}
 
 case class MetaProperty[ID_TYPE](
-                                  name: String,
+                                  nameField: NameField,
                                   function: GenerateFieldValueFunction[ID_TYPE, DataType[ID_TYPE]]
                                 ) {
 
-  def apply(id: ID_TYPE): String = "\"" + name + "\"" + s": ${function(id, name).jsonValue(id)}"
+  def apply(id: ID_TYPE): String = "\"" + nameField + "\"" + s": ${function(id, nameField).jsonValue(id, nameField)}"
 
 }

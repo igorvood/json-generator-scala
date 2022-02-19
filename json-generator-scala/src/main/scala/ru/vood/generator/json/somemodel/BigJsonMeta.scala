@@ -6,7 +6,7 @@ import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty, NumberType,
 import java.math.MathContext
 
 case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
-  override def jsonValue(id: String): String = generate(id)
+  override def jsonValue(id: String, nameField:NameField): String = generate(id)
   override val entityName: String = name
 
   private val asd: InternalJsonMeta = InternalJsonMeta("asd")

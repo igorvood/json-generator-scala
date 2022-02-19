@@ -6,7 +6,7 @@ import ru.vood.generator.json.service._
 case class DslJsonMeta(name: String) extends JsonEntityMeta[String] {
   override def entityName: String = name
 
-  override def jsonValue(id: String): String = generate(id)
+  override def jsonValue(id: String, nameField:NameField): String = generate(id)
 
   override def fields: Set[MetaProperty[String]] = Set(
     "str_d_1" asDataType { (_: String, _: NameField) => StringType("true") },
