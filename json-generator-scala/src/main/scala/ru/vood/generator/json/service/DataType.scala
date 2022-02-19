@@ -52,10 +52,10 @@ case class ListType[ID_TYPE](
 
 case class MapType[ID_TYPE, KEY_TYPE](
                                        private val generateKey: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE],
-                                       private val genVal: KEY_TYPE => DataType[KEY_TYPE]) extends DataType[ID_TYPE] {
+                                       private val genVal: (KEY_TYPE, NameField) => DataType[KEY_TYPE]) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "{" +
     generateKey(id, nameField)
-      .map(nextId => "\"" + nextId + "\":" + genVal(nextId).jsonValue(nextId, nameField))
+      .map(nextId => "\"" + nextId + "\":" + genVal(nextId, nameField).jsonValue(nextId, nameField))
       .mkString(",") + "}"
 
 }
