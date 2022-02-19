@@ -60,8 +60,8 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
   protected def listProp(nameField: NameField, generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
     MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListObjType(generateId, metaEntity))
 
-  protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE], genVal: ID_TYPE => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
-    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListType(v1, generateId, genVal))
+  protected def listProp(nameField: NameField, generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], genVal: ID_TYPE => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
+    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListType( generateId, genVal))
 
   protected def strConst(data: String): (ID_TYPE, NameField) => String = { (_, _) => data }
 
