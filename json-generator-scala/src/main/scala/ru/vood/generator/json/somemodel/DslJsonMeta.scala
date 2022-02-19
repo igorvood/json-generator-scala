@@ -18,7 +18,7 @@ case class DslJsonMeta(name: String) extends JsonEntityMeta[String] {
     "obj_1" asObj InternalJsonMeta2("asd"),
     "list_obj_1" asList( { (id, nameField) => (1 to (id.hashCode % 2 + 2)).map(_.toString) }, InternalJsonMeta2("asd")),
     "simple_list_1" asSimpleList( { (id, name) => (1 to (id.hashCode % 2 + 2)).map(_.toString) }, { id => NumberType(id.hashCode) }),
-    "simple_map_1" asSimpleMap( { id => (1 to (id.hashCode % 2 + 2)).map(_.toString) }, { q: String => NumberType[String](q.hashCode) }),
+    "simple_map_1" asSimpleMap( { (id, name) => (1 to (id.hashCode % 2 + 2)).map(_.toString) }, { q: String => NumberType[String](q.hashCode) }),
     "map_obj_1" asMap( { id => (1 to (id.hashCode % 2 + 2)).map(_.toString) }, InternalJsonMeta2("asd"))
   )
 }
