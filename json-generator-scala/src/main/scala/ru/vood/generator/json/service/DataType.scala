@@ -38,9 +38,9 @@ case class ListObjType[ID_TYPE](
 
 }
 
-case class ListType[ID_TYPE](
-                              private val generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
-                              private val genVal: ID_TYPE => DataType[ID_TYPE]) extends DataType[ID_TYPE] {
+case class ListType[ID_TYPE, NEW_ID_TYPE](
+                              private val generateId: (ID_TYPE, NameField) => immutable.Seq[NEW_ID_TYPE],
+                              private val genVal: NEW_ID_TYPE => DataType[NEW_ID_TYPE]) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "[" +
     generateId(id, nameField)
       .map(nextId => genVal(nextId).jsonValue(nextId, nameField))
