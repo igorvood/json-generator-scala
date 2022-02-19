@@ -4,7 +4,7 @@ import ru.vood.generator.json.abstraction.AbstractStringIdentyfyedEntity
 import ru.vood.generator.json.dsl.Predef.PropAssoc
 import ru.vood.generator.json.service.MetaProperty
 
-case class ListEntity(name: String) extends AbstractStringIdentyfyedEntity {
+case class ListSimple(name: String) extends AbstractStringIdentyfyedEntity {
   override def entityName: String = name
 
   override def fields: Set[MetaProperty[String]] = Set(

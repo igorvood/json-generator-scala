@@ -2,7 +2,7 @@ package ru.vood.generator.json
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
-import ru.vood.generator.json.somemodel.{ConstMeta, DslJsonRandomMeta, ListEntity}
+import ru.vood.generator.json.somemodel.{ConstMeta, DslJsonRandomMeta, ListSimple}
 
 import java.math.BigInteger
 import java.text.DecimalFormat
@@ -32,7 +32,7 @@ class Test extends AnyFlatSpec with should.Matchers {
 
   "json ListEntity rundom test" should "be called" in {
     val key = "asd"
-    val asd = ListEntity(key)
+    val asd = ListSimple(key)
 
     val str1 = asd.jsonValue(key)
     val str = asd.jsonValue(key)
