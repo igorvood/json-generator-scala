@@ -1,12 +1,13 @@
 package ru.vood.generator.json.somemodel
 
+import ru.vood.generator.json.abstraction.AbstractStringIdentifyedEntity
 import ru.vood.generator.json.dsl.Predef.{ArrowAssoc, NameField}
-import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty, NumberType, StringType}
+import ru.vood.generator.json.service.{MetaProperty, StringType}
 
 import java.math.MathContext
 
-case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
-  override def jsonValue(id: String, nameField:NameField): String = generate(id)
+case class BigJsonMeta(name: String) extends AbstractStringIdentifyedEntity {
+
   override val entityName: String = name
 
   private val asd: InternalJsonMeta = InternalJsonMeta("asd")
@@ -21,8 +22,8 @@ case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
     objProp("internal_object")(asd),
     strProp("uuid")(strConst(java.util.UUID.randomUUID().toString)),
     numProp("bid_num_const_2")(numConst(1643184276285d)),
-    listProp("list_object", { (id, name) => (1 to ((id.hashCode+name.hashCode) % 2 + 1)).map(_.toString) }, asd),
-    listProp("list_simple_object", { (id, name) => (1 to (id.hashCode % 2 + 3)).map(_.toString) }, { id => NumberType(id.hashCode) }),
+//    listProp("list_object", { (id, name) => (1 to ((id.hashCode+name.hashCode) % 2 + 1)).map(_.toString) }, asd),
+//    listProp("list_simple_object", { (id, name) => (1 to (id.hashCode % 2 + 3)).map(_.toString) }, { id => NumberType(id.hashCode) }),
 
     "dsl_str_1 " asDataType[String] { (v1: String, v2: NameField) => StringType("true") }
 

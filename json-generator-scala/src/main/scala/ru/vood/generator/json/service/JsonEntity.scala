@@ -9,10 +9,26 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   type ID = ID_TYPE
 
+  def convertHashToID(i: Int): ID_TYPE
+
   val defaultStr: GenerateFieldValueFunction[ID_TYPE, String] = { (id, nameField) => (id.hashCode + nameField.hashCode).toString }
   val defaultNum: GenerateFieldValueFunction[ID_TYPE, BigDecimal] = { (id, nameField) => id.hashCode + nameField.hashCode }
   val defaultBool: GenerateFieldValueFunction[ID_TYPE, Boolean] = { (id, nameField) =>
     if ((id.hashCode + nameField.hashCode) % 2 == 0) false else true
+  }
+  val defaultListNum: (ID_TYPE, NameField) => NumberType[ID_TYPE] = { (id, nameField) => NumberType(defaultNum(id, nameField)) }
+  val defaultListStr: (ID_TYPE, NameField) => StringType[ID_TYPE] = { (id, nameField) => StringType(defaultStr(id, nameField)) }
+  val defaultListBool: (ID_TYPE, NameField) => BooleanType[ID_TYPE] = { (id, nameField) => BooleanType(defaultBool(id, nameField)) }
+
+  def genListCountDefault(min: Int = 1, max: Int = 3): (ID_TYPE, NameField) => immutable.Seq[ID_TYPE] = {
+    require(min <= max)
+    require(min >= 0)
+    require(max >= 0)
+    val result: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE] = (id, name) => {
+      val hash = id.hashCode() + name.hashCode
+      (0 to (hash % max + min)).map(convertHashToID)
+    }
+    result
   }
 
 
@@ -57,11 +73,11 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
   protected def objProp(nameField: NameField)(metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
     MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ObjectType(metaEntity))
 
-  protected def listProp(nameField: NameField, generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
-    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListObjType(generateId, metaEntity))
+  //  protected def listProp(nameField: NameField, generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
+  //    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListObjType(generateId, metaEntity))
 
-  protected def listProp(nameField: NameField, generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], genVal: ID_TYPE => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
-    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListType( generateId, genVal))
+  //  protected def listProp(nameField: NameField, generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], genVal: DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
+  //    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListType( generateId, genVal))
 
   protected def strConst(data: String): (ID_TYPE, NameField) => String = { (_, _) => data }
 

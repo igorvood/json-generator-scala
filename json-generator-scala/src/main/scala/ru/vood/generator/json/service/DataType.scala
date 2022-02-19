@@ -28,6 +28,7 @@ case class ObjectType[ID_TYPE](private val meta: JsonEntityMeta[ID_TYPE]) extend
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = meta.jsonValue(id, nameField)
 }
 
+/*
 case class ListObjType[ID_TYPE](
                                  private val generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
                                  private val meta: JsonEntityMeta[ID_TYPE]) extends DataType[ID_TYPE] {
@@ -37,13 +38,14 @@ case class ListObjType[ID_TYPE](
       .mkString(",") + "]"
 
 }
+*/
 
-case class ListType[ID_TYPE, NEW_ID_TYPE](
-                                           private val generateId: (ID_TYPE, NameField) => immutable.Seq[NEW_ID_TYPE],
-                                           private val genVal: NEW_ID_TYPE => DataType[NEW_ID_TYPE]) extends DataType[ID_TYPE] {
+case class ListType[ID_TYPE](
+                                           private val generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
+                                           private val genVal: (ID_TYPE, NameField) => DataType[ID_TYPE]) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "[" +
     generateId(id, nameField)
-      .map(nextId => genVal(nextId).jsonValue(nextId, nameField))
+      .map(nextId => genVal(id, nameField).jsonValue(nextId, nameField))
       .mkString(",") + "]"
 
 }
@@ -62,7 +64,7 @@ case class MapObjType[ID_TYPE, KEY_TYPE](
                                           private val generateKey: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE],
                                           private val meta: JsonEntityMeta[KEY_TYPE]) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "{" +
-    generateKey(id,nameField)
+    generateKey(id, nameField)
       .map(nextId => "\"" + nextId + "\":" + meta.generate(nextId))
       //      .map(nextId => nextId + ":" + genVal(nextId).jsonValue())
       .mkString(",") + "}"
