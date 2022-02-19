@@ -5,7 +5,7 @@ import ru.vood.generator.json.service
 
 import scala.collection.immutable
 
-trait JsonEntityMeta[ID_TYPE] /*extends DataType*/ {
+trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   type ID = ID_TYPE
 
@@ -59,7 +59,7 @@ trait JsonEntityMeta[ID_TYPE] /*extends DataType*/ {
   protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE], metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
     MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListObjType(v1, generateId, metaEntity))
 
-  protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE], genVal: ID_TYPE => DataType): MetaProperty[ID_TYPE] =
+  protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE], genVal: ID_TYPE => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
     MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListType(v1, generateId, genVal))
 
   protected def strConst(data: String): (ID_TYPE, NameField) => String = { (_, _) => data }
