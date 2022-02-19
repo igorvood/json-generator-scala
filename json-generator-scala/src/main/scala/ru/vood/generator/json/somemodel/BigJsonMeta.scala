@@ -1,12 +1,12 @@
 package ru.vood.generator.json.somemodel
 
-import ru.vood.generator.json.abstraction.AbstractStringIdentifyedEntity
+import ru.vood.generator.json.abstraction.AbstractStringIdentyfyedEntity
 import ru.vood.generator.json.dsl.Predef.{ArrowAssoc, NameField}
 import ru.vood.generator.json.service.{MetaProperty, StringType}
 
 import java.math.MathContext
 
-case class BigJsonMeta(name: String) extends AbstractStringIdentifyedEntity {
+case class BigJsonMeta(name: String) extends AbstractStringIdentyfyedEntity {
 
   override val entityName: String = name
 

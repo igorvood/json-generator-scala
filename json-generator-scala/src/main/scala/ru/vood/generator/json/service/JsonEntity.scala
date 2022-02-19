@@ -34,6 +34,8 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   def entityName: String
 
+  def jsonValue(id: ID_TYPE): String = jsonValue(id, entityName)
+
   def fields: Set[MetaProperty[ID_TYPE]]
 
   @deprecated

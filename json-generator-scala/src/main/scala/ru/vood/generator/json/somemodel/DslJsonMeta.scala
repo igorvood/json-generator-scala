@@ -1,10 +1,10 @@
 package ru.vood.generator.json.somemodel
 
-import ru.vood.generator.json.abstraction.AbstractStringIdentifyedEntity
+import ru.vood.generator.json.abstraction.AbstractStringIdentyfyedEntity
 import ru.vood.generator.json.dsl.Predef.{ArrowAssoc, NameField}
 import ru.vood.generator.json.service._
 
-case class DslJsonMeta(name: String) extends AbstractStringIdentifyedEntity {
+case class DslJsonMeta(name: String) extends AbstractStringIdentyfyedEntity {
   override def entityName: String = name
 
   override def fields: Set[MetaProperty[String]] = Set(

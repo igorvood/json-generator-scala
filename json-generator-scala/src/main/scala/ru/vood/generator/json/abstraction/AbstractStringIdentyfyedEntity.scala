@@ -1,13 +1,13 @@
 package ru.vood.generator.json.abstraction
 
 import ru.vood.generator.json.dsl.Predef.NameField
-import ru.vood.generator.json.service.{DataType, JsonEntityMeta}
+import ru.vood.generator.json.service.JsonEntityMeta
 
-abstract class AbstractStringIdentifyedEntity extends JsonEntityMeta[String] {
+abstract class AbstractStringIdentyfyedEntity extends JsonEntityMeta[String] {
 
   override def convertHashToID(i: Int): String = i.toString
 
-  override def jsonValue(id: String, nameField:NameField): String = {
+  override def jsonValue(id: String, nameField: NameField): String = {
     validateMeta
     val res = meta.property
       .map(prop => {
