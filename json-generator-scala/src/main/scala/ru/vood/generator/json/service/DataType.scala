@@ -45,7 +45,7 @@ case class ListType[ID_TYPE](
                               private val genVal: (ID_TYPE, NameField) => DataType[ID_TYPE]) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "[" +
     generateId(id, nameField)
-      .map(nextId => genVal(id, nameField).jsonValue(nextId, nameField))
+      .map(nextId => genVal(nextId, nameField).jsonValue(nextId, nameField))
       .mkString(",") + "]"
 
 }
