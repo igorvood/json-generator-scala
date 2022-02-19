@@ -25,7 +25,7 @@ class Test extends AnyFlatSpec with should.Matchers {
     val str1 = asd.generate("asd")
     val str = asd.generate("asd")
 
-    assert(str==str1)
+    assert(str == str1)
     println(str1)
   }
 
@@ -50,11 +50,6 @@ class Test extends AnyFlatSpec with should.Matchers {
 
     println(format.format(decimal1))
 
-    //    val str = BigDecimalJson("asd").generate("asd")
-    //
-    //    assert(str.contains("769076634611932"))
-    //    assert(str.contains("7690766346119321553"))
-    //    println(str)
   }
 
 
