@@ -33,6 +33,8 @@ object Predef {
     @inline def asSimpleMap[ID_TYPE, KEY_TYPE](generateId: ID_TYPE => immutable.Seq[KEY_TYPE], y: KEY_TYPE => DataType): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapType(v1, generateId, y) })
 
+    @inline def asMap[ID_TYPE, KEY_TYPE](generateId: ID_TYPE => immutable.Seq[KEY_TYPE], y: JsonEntityMeta[KEY_TYPE]): MetaProperty[ID_TYPE] =
+      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapObjType(v1, generateId, y) })
 
   }
 
