@@ -2,7 +2,7 @@ package ru.vood.generator.json
 
 import ru.vood.generator.json.dsl.Predef.ArrowAssoc
 import ru.vood.generator.json.service.FunConst.NameField
-import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty, StringType}
+import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty, NumberType, StringType}
 
 import scala.collection.immutable
 
@@ -22,7 +22,9 @@ case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
     objProp("internal_object")(asd),
     strProp("uuid")(strConst(java.util.UUID.randomUUID().toString)),
     numProp("bid_num_const_2")(numConst(1643184276285d)),
-    listProp("list_object", { id => (1 to ("asdasd".hashCode % 2 + 2)).map(_.toString) })(asd)
+    listProp("list_object", { id => (1 to (id.hashCode % 2 + 1)).map(_.toString) }, asd),
+    listProp("list_simple_object", { id => (1 to (id.hashCode % 2 + 3)).map(_.toString) }, { id => NumberType(id.hashCode) })
+
   )
   val dasd = "asdad " withFun[String] {
 

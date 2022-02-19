@@ -1,7 +1,7 @@
 package ru.vood.generator.json.service
 
-import FunConst.{GenerateFieldValueFunction, NameField}
 import ru.vood.generator.json.service
+import ru.vood.generator.json.service.FunConst.{GenerateFieldValueFunction, NameField}
 
 import scala.collection.immutable
 
@@ -49,9 +49,11 @@ trait JsonEntityMeta[ID_TYPE] {
   protected def objProp(nameField: NameField)(metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
     MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ObjectType(v1, metaEntity))
 
-  protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE] )(metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
-    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListObjType(v1,generateId, metaEntity))
+  protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE], metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
+    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListObjType(v1, generateId, metaEntity))
 
+  protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE], genVal: ID_TYPE => DataType): MetaProperty[ID_TYPE] =
+    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListType(v1, generateId, genVal))
 
   protected def strConst(data: String): (ID_TYPE, NameField) => String = { (_, _) => data }
 
