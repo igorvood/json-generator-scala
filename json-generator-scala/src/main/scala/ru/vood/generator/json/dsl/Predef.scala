@@ -10,7 +10,7 @@ object Predef {
 
   type GenerateFieldValueFunction[ID_TYPE, OUT_TYPE] = (ID_TYPE, NameField) => OUT_TYPE
 
-  implicit final class ArrowAssoc(private val self: String) extends AnyVal {
+  implicit final class PropAssoc(private val self: String) extends AnyVal {
 
     @inline def asObj[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] = MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
 

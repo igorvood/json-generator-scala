@@ -1,7 +1,7 @@
 package ru.vood.generator.json.somemodel
 
 import ru.vood.generator.json.abstraction.AbstractStringIdentyfyedEntity
-import ru.vood.generator.json.dsl.Predef.ArrowAssoc
+import ru.vood.generator.json.dsl.Predef.PropAssoc
 
 case class DslJsonRandomMeta(name: String) extends AbstractStringIdentyfyedEntity {
   override def entityName: String = name

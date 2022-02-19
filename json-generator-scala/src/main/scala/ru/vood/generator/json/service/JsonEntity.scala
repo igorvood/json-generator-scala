@@ -38,19 +38,6 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   def fields: Set[MetaProperty[ID_TYPE]]
 
-  @deprecated
-  def generate(id: ID_TYPE): String = {
-    validateMeta
-    val res = meta.property
-      .map(prop => {
-        val prop1 = prop
-        val str = prop1(id)
-        str
-      })
-      .mkString(sep = ",")
-    s"{$res}"
-  }
-
   protected def meta: MetaEntity[ID_TYPE] = service.MetaEntity(entityName, fields)
 
   def validateMeta(): Unit = {
