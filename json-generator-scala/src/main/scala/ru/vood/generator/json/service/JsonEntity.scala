@@ -9,6 +9,13 @@ trait JsonEntityMeta[ID_TYPE] /*extends DataType*/ {
 
   type ID = ID_TYPE
 
+  val defaultStr: GenerateFieldValueFunction[ID_TYPE, String] = { (id, nameField) => (id.hashCode + nameField.hashCode).toString }
+  val defaultNum: GenerateFieldValueFunction[ID_TYPE, BigDecimal] = { (id, nameField) => id.hashCode + nameField.hashCode }
+  val defaultBool: GenerateFieldValueFunction[ID_TYPE, Boolean] = { (id, nameField) =>
+    if ((id.hashCode + nameField.hashCode) % 2 == 0) false else true
+  }
+
+
   def entityName: String
 
   def fields: Set[MetaProperty[ID_TYPE]]
