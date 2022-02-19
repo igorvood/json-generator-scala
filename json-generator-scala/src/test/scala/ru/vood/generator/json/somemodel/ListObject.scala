@@ -10,7 +10,7 @@ case class ListObject(name: String) extends AbstractStringIdentyfyedEntity {
   override def fields: Set[MetaProperty[String]] = {
 
     Set(
-//      "bool_list" asListNew(genListCountDefault(1, 10), { (q, qw) => InternalJsonMeta3(qw) }),
+      "bool_list" asListNew(genListCountDefault(1, 10), { (q, qw) => InternalJsonMeta3(qw) }),
       "obj_list1" asListNew(genListCountDefault(2, 5), { (q, qw) => InternalJsonMeta3(qw) })
     )
   }
