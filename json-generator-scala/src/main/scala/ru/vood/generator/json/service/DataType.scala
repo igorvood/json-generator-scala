@@ -59,11 +59,10 @@ case class MapType[ID_TYPE, KEY_TYPE](
 }
 
 case class MapObjType[ID_TYPE, KEY_TYPE](
-                                          private val id: ID_TYPE,
-                                          private val generateKey: ID_TYPE => immutable.Seq[KEY_TYPE],
+                                          private val generateKey: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE],
                                           private val meta: JsonEntityMeta[KEY_TYPE]) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "{" +
-    generateKey(id)
+    generateKey(id,nameField)
       .map(nextId => "\"" + nextId + "\":" + meta.generate(nextId))
       //      .map(nextId => nextId + ":" + genVal(nextId).jsonValue())
       .mkString(",") + "}"
