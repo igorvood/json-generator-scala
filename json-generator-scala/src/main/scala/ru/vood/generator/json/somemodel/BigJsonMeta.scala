@@ -3,6 +3,8 @@ package ru.vood.generator.json.somemodel
 import ru.vood.generator.json.service.FunConst.NameField
 import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty, NumberType, StringType}
 import ru.vood.generator.json.dsl.Predef.ArrowAssoc
+
+import java.math.MathContext
 import scala.collection.immutable
 
 case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
@@ -17,7 +19,7 @@ case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
     numProp("bid_num_const")(numConst(5847820665765589324d)),
     strProp("str_const")(strConst("2.0")),
     strProp("entity_id")((id, _) => id),
-    numProp("less_zero_big_num_const")(numConst(-7690766346119321553d)),
+    numProp("less_zero_big_num_const")(numConst(BigDecimal(-7690766346119321553d,new MathContext(23)))),
     objProp("internal_object")(asd),
     strProp("uuid")(strConst(java.util.UUID.randomUUID().toString)),
     numProp("bid_num_const_2")(numConst(1643184276285d)),
