@@ -3,7 +3,7 @@ package ru.vood.generator.json.service
 import java.text.DecimalFormat
 import scala.collection.immutable
 
-sealed trait DataType {
+trait DataType {
   def jsonValue(): String
 }
 

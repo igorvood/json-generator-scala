@@ -1,11 +1,10 @@
 package ru.vood.generator.json.somemodel
 
+import ru.vood.generator.json.dsl.Predef.ArrowAssoc
 import ru.vood.generator.json.service.FunConst.NameField
 import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty, NumberType, StringType}
-import ru.vood.generator.json.dsl.Predef.ArrowAssoc
 
 import java.math.MathContext
-import scala.collection.immutable
 
 case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
 
@@ -19,19 +18,19 @@ case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {
     numProp("bid_num_const")(numConst(5847820665765589324d)),
     strProp("str_const")(strConst("2.0")),
     strProp("entity_id")((id, _) => id),
-    numProp("less_zero_big_num_const")(numConst(BigDecimal(-7690766346119321553d,new MathContext(23)))),
+    numProp("less_zero_big_num_const")(numConst(BigDecimal(-7690766346119321553d, new MathContext(23)))),
     objProp("internal_object")(asd),
     strProp("uuid")(strConst(java.util.UUID.randomUUID().toString)),
     numProp("bid_num_const_2")(numConst(1643184276285d)),
     listProp("list_object", { id => (1 to (id.hashCode % 2 + 1)).map(_.toString) }, asd),
-    listProp("list_simple_object", { id => (1 to (id.hashCode % 2 + 3)).map(_.toString) }, { id => NumberType(id.hashCode) })
+    listProp("list_simple_object", { id => (1 to (id.hashCode % 2 + 3)).map(_.toString) }, { id => NumberType(id.hashCode) }),
+
+    "dsl_str_1 " asDataType[String] { (v1: String, v2: NameField) => StringType("true") }
 
   )
-  val dasd = "asdad " withFun[String] {
+//  val dasd = "asdad " withFun[String] { (v1: String, v2: NameField) => StringType("true") }
+//  private val value = "asdad " withFun { (v1: String, v2: NameField) => "true" }
 
-    val strings: immutable.Seq[NameField] = (1 to ("asdasd".hashCode % 2 + 1)).map(_.toString)
 
-    (v1: ID, v2: NameField) => StringType("true")
-  }
 
 }

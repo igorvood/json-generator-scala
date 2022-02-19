@@ -5,7 +5,7 @@ import ru.vood.generator.json.service.FunConst.{GenerateFieldValueFunction, Name
 
 import scala.collection.immutable
 
-trait JsonEntityMeta[ID_TYPE] {
+trait JsonEntityMeta[ID_TYPE] /*extends DataType*/{
 
   type ID = ID_TYPE
 
