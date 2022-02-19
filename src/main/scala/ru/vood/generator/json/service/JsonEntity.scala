@@ -3,6 +3,8 @@ package ru.vood.generator.json.service
 import FunConst.{GenerateFieldValueFunction, NameField}
 import ru.vood.generator.json.service
 
+import scala.collection.immutable
+
 trait JsonEntityMeta[ID_TYPE] {
 
   type ID = ID_TYPE
@@ -44,8 +46,12 @@ trait JsonEntityMeta[ID_TYPE] {
   protected def boolProp(nameField: NameField)(dataGen: GenerateFieldValueFunction[ID_TYPE, Boolean]): MetaProperty[ID_TYPE] =
     MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => BooleanType(dataGen(v1, v2)))
 
-  protected def objProp(nameField: NameField)(dataGen: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
-    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ObjectType(v1, dataGen))
+  protected def objProp(nameField: NameField)(metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
+    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ObjectType(v1, metaEntity))
+
+  protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE] )(metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
+    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListType(v1,generateId, metaEntity))
+
 
   protected def strConst(data: String): (ID_TYPE, NameField) => String = { (_, _) => data }
 

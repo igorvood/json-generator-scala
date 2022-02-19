@@ -1,5 +1,7 @@
 package ru.vood.generator.json.service
 
+import scala.collection.immutable
+
 sealed trait DataType {
   def jsonValue(): String
 }
@@ -18,6 +20,18 @@ case class StringType(private val v: String) extends DataType {
 
 case class ObjectType[ID_TYPE](private val id: ID_TYPE, private val meta: JsonEntityMeta[ID_TYPE]) extends DataType {
   override def jsonValue(): String = meta.generate(id)
+}
+
+case class ListType[ID_TYPE](
+                              private val id: ID_TYPE,
+                              private val generateId: ID_TYPE => immutable.Seq[ID_TYPE],
+                              private val meta: JsonEntityMeta[ID_TYPE]) extends DataType {
+  override def jsonValue(): String = "[" +
+    generateId(id)
+      .map(nextId => meta.generate(nextId))
+      .mkString(",") + "]"
+
+
 }
 
 
