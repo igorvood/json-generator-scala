@@ -1,9 +1,8 @@
-package ru.vood.generator.json
+package ru.vood.generator.json.somemodel
 
-import ru.vood.generator.json.dsl.Predef.ArrowAssoc
 import ru.vood.generator.json.service.FunConst.NameField
 import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty, NumberType, StringType}
-
+import ru.vood.generator.json.dsl.Predef.ArrowAssoc
 import scala.collection.immutable
 
 case class BigJsonMeta(name: String) extends JsonEntityMeta[String] {

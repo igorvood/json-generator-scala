@@ -1,4 +1,4 @@
-package ru.vood.generator.json
+package ru.vood.generator.json.somemodel
 
 import ru.vood.generator.json.service.{JsonEntityMeta, MetaProperty}
 
