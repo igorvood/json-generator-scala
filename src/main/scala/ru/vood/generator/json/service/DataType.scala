@@ -27,9 +27,9 @@ case class ObjectType[ID_TYPE](private val id: ID_TYPE, private val meta: JsonEn
 }
 
 case class ListObjType[ID_TYPE](
-                              private val id: ID_TYPE,
-                              private val generateId: ID_TYPE => immutable.Seq[ID_TYPE],
-                              private val meta: JsonEntityMeta[ID_TYPE]) extends DataType {
+                                 private val id: ID_TYPE,
+                                 private val generateId: ID_TYPE => immutable.Seq[ID_TYPE],
+                                 private val meta: JsonEntityMeta[ID_TYPE]) extends DataType {
   override def jsonValue(): String = "[" +
     generateId(id)
       .map(nextId => meta.generate(nextId))
@@ -37,5 +37,14 @@ case class ListObjType[ID_TYPE](
 
 }
 
+case class ListType[ID_TYPE](
+                              private val id: ID_TYPE,
+                              private val generateId: ID_TYPE => immutable.Seq[ID_TYPE],
+                              private val genVal: ID_TYPE => DataType) extends DataType {
+  override def jsonValue(): String = "[" +
+    generateId(id)
+      .map(nextId => genVal(nextId).jsonValue())
+      .mkString(",") + "]"
 
+}
 
