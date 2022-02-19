@@ -4,6 +4,7 @@ import ru.vood.generator.json.dsl.Predef.{GenerateFieldValueFunction, NameField}
 import ru.vood.generator.json.service
 
 import scala.collection.immutable
+import scala.math.abs
 
 trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
@@ -25,8 +26,9 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
     require(min >= 0)
     require(max >= 0)
     val result: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE] = (id, name) => {
-      val hash = id.hashCode() + name.hashCode
-      (0 to (hash % max + min)).map(convertHashToID)
+      val hash = abs(id.hashCode() + name.hashCode)
+      val inclusive = 0 to (hash % (max-min) + min)
+      inclusive.map(convertHashToID)
     }
     result
   }
