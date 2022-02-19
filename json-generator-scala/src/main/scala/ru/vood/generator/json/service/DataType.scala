@@ -48,3 +48,16 @@ case class ListType[ID_TYPE](
 
 }
 
+case class MapType[ID_TYPE, KEY_TYPE](
+                                       private val id: ID_TYPE,
+                                       private val generateKey: ID_TYPE => immutable.Seq[KEY_TYPE],
+                                       private val genVal: KEY_TYPE => DataType) extends DataType {
+  override def jsonValue(): String = "{" +
+    generateKey(id)
+      .map(nextId => "\""+nextId + "\":" + genVal(nextId).jsonValue())
+//      .map(nextId => nextId + ":" + genVal(nextId).jsonValue())
+      .mkString(",") + "}"
+
+}
+
+

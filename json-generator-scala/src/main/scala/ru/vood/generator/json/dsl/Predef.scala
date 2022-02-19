@@ -30,6 +30,10 @@ object Predef {
     @inline def asSimpleList[ID_TYPE](generateId: ID_TYPE => immutable.Seq[ID_TYPE], y: ID_TYPE => DataType): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(v1, generateId, y) })
 
+    @inline def asSimpleMap[ID_TYPE, KEY_TYPE](generateId: ID_TYPE => immutable.Seq[KEY_TYPE], y: KEY_TYPE => DataType): MetaProperty[ID_TYPE] =
+      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapType(v1, generateId, y) })
+
+
   }
 
 }
