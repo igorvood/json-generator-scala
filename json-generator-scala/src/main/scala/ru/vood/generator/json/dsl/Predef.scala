@@ -27,20 +27,12 @@ object Predef {
     @inline def asBool[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, Boolean]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (i, w) => BooleanType(y(i, w)) })
 
-    @inline def asListNew[ID_TYPE](
+    @inline def asList[ID_TYPE](
                                     generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
                                     y: (ID_TYPE, NameField) => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
 
     //------------------------------
-    @inline def asDataType[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, DataType[ID_TYPE]]): MetaProperty[ID_TYPE] = MetaProperty(self, y)
-
-
-    //    @inline def asList[ID_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], y: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
-    //      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListObjType(generateId, y) })
-
-    //    @inline def asSimpleList[ID_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], y: ID_TYPE => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
-    //      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
 
     @inline def asSimpleMap[ID_TYPE, KEY_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE], y: KEY_TYPE => DataType[KEY_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapType(generateId, y) })

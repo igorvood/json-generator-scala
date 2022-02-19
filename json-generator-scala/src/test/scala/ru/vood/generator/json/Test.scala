@@ -56,7 +56,7 @@ class Test extends AnyFlatSpec with should.Matchers {
   "json DslJsonRandomMeta random by name test" should "be called" in {
     val key = "asd"
     val asd = DslJsonRandomMeta(key)
-    val asd1 = DslJsonRandomMeta(key+1)
+    val asd1 = DslJsonRandomMeta(key+"1")
 
     val str1 = asd.jsonValue(key)
     val str = asd1.jsonValue(key)
