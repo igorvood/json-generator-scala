@@ -11,9 +11,10 @@ case class DslJsonRandomMeta(name: String) extends AbstractStringIdentyfyedEntit
     "num_2" asNum defaultNum,
     "bool_3" asBool defaultBool,
     "obj" asObj InternalJsonMeta3("asd"),
-    "list_num" asListNew(genListCountDefault(1, 10), defaultListNum),
-    "list_str" asListNew(genListCountDefault(1, 10), defaultListStr),
-    "list_bool" asListNew(genListCountDefault(1, 10), defaultListBool),
+    "str_10" asStr defaultStr,
+    "num_20" asNum defaultNum,
+    "bool_30" asBool defaultBool,
+    "obj_9" asObj InternalJsonMeta3("asd1"),
 
   )
 }
