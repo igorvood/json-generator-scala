@@ -20,6 +20,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   def fields: Set[MetaProperty[ID_TYPE]]
 
+  @deprecated
   def generate(id: ID_TYPE): String = {
     validateMeta
     val res = meta.property
@@ -54,10 +55,10 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
     MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => BooleanType(dataGen(v1, v2)))
 
   protected def objProp(nameField: NameField)(metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
-    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ObjectType(v1, metaEntity))
+    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ObjectType(metaEntity))
 
-  protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE], metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
-    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListObjType(v1, generateId, metaEntity))
+  protected def listProp(nameField: NameField, generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], metaEntity: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
+    MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListObjType(generateId, metaEntity))
 
   protected def listProp(nameField: NameField, generateId: ID_TYPE => immutable.Seq[ID_TYPE], genVal: ID_TYPE => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
     MetaProperty(nameField, (v1: ID_TYPE, v2: NameField) => ListType(v1, generateId, genVal))

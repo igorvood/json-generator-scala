@@ -24,17 +24,16 @@ case class StringType[ID_TYPE](private val v: String) extends DataType[ID_TYPE] 
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "\"" + v + "\""
 }
 
-case class ObjectType[ID_TYPE](private val id: ID_TYPE, private val meta: JsonEntityMeta[ID_TYPE]) extends DataType[ID_TYPE] {
-  override def jsonValue(id: ID_TYPE, nameField: NameField): String = meta.generate(id)
+case class ObjectType[ID_TYPE](private val meta: JsonEntityMeta[ID_TYPE]) extends DataType[ID_TYPE] {
+  override def jsonValue(id: ID_TYPE, nameField: NameField): String = meta.jsonValue(id, nameField)
 }
 
 case class ListObjType[ID_TYPE](
-                                 private val id: ID_TYPE,
-                                 private val generateId: ID_TYPE => immutable.Seq[ID_TYPE],
+                                 private val generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
                                  private val meta: JsonEntityMeta[ID_TYPE]) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "[" +
-    generateId(id)
-      .map(nextId => meta.generate(nextId))
+    generateId(id, nameField)
+      .map(nextId => meta.jsonValue(nextId,nameField))
       .mkString(",") + "]"
 
 }
