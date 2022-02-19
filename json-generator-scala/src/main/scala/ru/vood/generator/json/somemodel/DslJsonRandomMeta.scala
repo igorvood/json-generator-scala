@@ -8,10 +8,11 @@ case class DslJsonRandomMeta(name: String) extends JsonEntityMeta[String] {
 
   override def jsonValue(id: String, nameField:NameField): String = generate(id)
 
-  override def fields: Set[MetaProperty[String]] = Set(
+  override def fields = Set(
     "str_1" asStr defaultStr,
     "num_2" asNum defaultNum,
     "bool_3" asBool defaultBool,
-    "obj" as InternalJsonMeta3("asd")
+    "obj" asObj InternalJsonMeta3("asd")
+
   )
 }

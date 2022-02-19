@@ -12,7 +12,7 @@ object Predef {
 
   implicit final class ArrowAssoc(private val self: String) extends AnyVal {
 
-    @inline def as[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] = MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
+    @inline def asObj[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] = MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
 
     @inline def asStr[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, String]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (i, w) => StringType(y(i, w)) })
@@ -43,7 +43,7 @@ object Predef {
       MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapType(generateId, y) })
 
     @inline def asMap[ID_TYPE, KEY_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE], y: JsonEntityMeta[KEY_TYPE]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapObjType( generateId, y) })
+      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapObjType(generateId, y) })
 
   }
 
