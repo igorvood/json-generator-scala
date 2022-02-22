@@ -14,6 +14,13 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   val defaultStr: GenerateFieldValueFunction[ID_TYPE, String] = { (id, nameField) => (id.hashCode + nameField.hashCode).toString }
   val defaultNum: GenerateFieldValueFunction[ID_TYPE, BigDecimal] = { (id, nameField) => id.hashCode + nameField.hashCode }
+
+  val defaultNum2: (Double, Double) => GenerateFieldValueFunction[ID_TYPE, BigDecimal] = defaultNumRange
+
+   def defaultNumRange(min: Double = Double.MinValue, max: Double = Double.MaxValue): GenerateFieldValueFunction[ID_TYPE, BigDecimal] = {
+    (id, nameField) => (id.hashCode + nameField.hashCode) % (max - min) + min
+  }
+
   val defaultBool: GenerateFieldValueFunction[ID_TYPE, Boolean] = { (id, nameField) =>
     if ((id.hashCode + nameField.hashCode) % 2 == 0) false else true
   }
@@ -27,7 +34,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
     require(max >= 0)
     val result: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE] = (id, name) => {
       val hash = abs(id.hashCode() + name.hashCode)
-      val inclusive = 0 to (hash % (max-min) + min)
+      val inclusive = 0 to (hash % (max - min) + min)
       inclusive.map(convertHashToID)
     }
     result

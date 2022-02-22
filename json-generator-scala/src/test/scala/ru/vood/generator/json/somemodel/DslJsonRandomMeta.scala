@@ -9,6 +9,7 @@ case class DslJsonRandomMeta(name: String) extends AbstractStringIdentyfyedEntit
   override def fields = Set(
     "str_1" asStr defaultStr,
     "num_2" asNum defaultNum,
+    "num_3" asNum defaultNumRange(1,10),
     "bool_3" asBool defaultBool,
     "obj" asObj InternalJsonMeta3("asd"),
     "str_10" asStr defaultStr,
