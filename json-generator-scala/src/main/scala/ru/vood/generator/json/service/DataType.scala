@@ -9,6 +9,10 @@ trait DataType[ID_TYPE] {
   def jsonValue(id: ID_TYPE, nameField: NameField): String
 }
 
+case class NullType[ID_TYPE]() extends DataType[ID_TYPE] {
+  override def jsonValue(id: ID_TYPE, nameField: NameField): String = "null"
+}
+
 case class BooleanType[ID_TYPE](private val v: Boolean) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = if (v) "true" else "false"
 }
