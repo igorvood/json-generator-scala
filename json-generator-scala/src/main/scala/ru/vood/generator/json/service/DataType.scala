@@ -52,6 +52,7 @@ case class MapType[ID_TYPE, KEY_TYPE](
 
 }
 
+@deprecated
 case class MapObjType[ID_TYPE, KEY_TYPE](
                                           private val generateKey: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE],
                                           private val meta: JsonEntityMeta[KEY_TYPE]) extends DataType[ID_TYPE] {
