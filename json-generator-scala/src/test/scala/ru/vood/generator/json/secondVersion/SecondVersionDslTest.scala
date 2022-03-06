@@ -2,7 +2,6 @@ package ru.vood.generator.json.secondVersion
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
-import ru.vood.generator.json.somemodel.MapMeta
 
 class SecondVersionDslTest extends AnyFlatSpec with should.Matchers {
 
