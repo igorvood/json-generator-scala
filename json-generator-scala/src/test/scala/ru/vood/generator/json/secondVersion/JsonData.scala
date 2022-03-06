@@ -17,7 +17,7 @@ case class JsonData() extends AbstractNumberIdentyfyedEntity {
     "str_fun" asStr defaultStr,
     "num_fun" asNum defaultNum,
     "bool_fun" asBool defaultBool,
-//    "str_list" asStr defaultListNum(),
+//    "str_list" asList( genListCountDefault(1,2), )
 //    "num_list" asNum defaultNum,
 //    "bool_list" asBool defaultBool,
 

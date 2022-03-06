@@ -2,6 +2,8 @@ package ru.vood.generator.json.dsl
 
 import ru.vood.generator.json.service._
 
+import scala.collection.immutable
+
 object Predef2Version {
 
   type NameField = String
@@ -31,6 +33,9 @@ object Predef2Version {
     @inline def asBool[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, Boolean]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (i, w) => BooleanType(y(i, w)) })
 
+    @inline def asList[ID_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
+                                y: (ID_TYPE, NameField) => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
+      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
 
     /*@inline def asObj[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
@@ -48,9 +53,6 @@ object Predef2Version {
     @inline def asNull[ID_TYPE]: MetaProperty[ID_TYPE] =
       MetaProperty(self, { (_, _) => NullType() })
 
-    @inline def asList[ID_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
-                                y: (ID_TYPE, NameField) => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
 
     @inline def asMap[ID_TYPE, KEY_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE],
                                          y: (KEY_TYPE, NameField) => DataType[KEY_TYPE]): MetaProperty[ID_TYPE] =
