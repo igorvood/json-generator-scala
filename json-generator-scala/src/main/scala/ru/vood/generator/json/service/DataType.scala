@@ -8,15 +8,15 @@ import scala.collection.immutable
 trait DataType[ID_TYPE] {
   def jsonValue(id: ID_TYPE, nameField: NameField): String
 }
-//+
+
 case class NullType[ID_TYPE]() extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "null"
 }
-//+
+
 case class BooleanType[ID_TYPE](private val v: Boolean) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = if (v) "true" else "false"
 }
-//+
+
 case class NumberType[ID_TYPE](private val v: BigDecimal, private val printFormat: String = "########################") extends DataType[ID_TYPE] {
 
   private val format = new DecimalFormat(printFormat)
@@ -24,7 +24,6 @@ case class NumberType[ID_TYPE](private val v: BigDecimal, private val printForma
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = format.format(v)
 }
 
-//+
 case class StringType[ID_TYPE](private val v: String) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = "\"" + v + "\""
 }
@@ -32,18 +31,6 @@ case class StringType[ID_TYPE](private val v: String) extends DataType[ID_TYPE] 
 case class ObjectType[ID_TYPE](private val meta: JsonEntityMeta[ID_TYPE]) extends DataType[ID_TYPE] {
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = meta.jsonValue(id, nameField)
 }
-
-/*
-case class ListObjType[ID_TYPE](
-                                 private val generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
-                                 private val meta: JsonEntityMeta[ID_TYPE]) extends DataType[ID_TYPE] {
-  override def jsonValue(id: ID_TYPE, nameField: NameField): String = "[" +
-    generateId(id, nameField)
-      .map(nextId => meta.jsonValue(nextId, nameField))
-      .mkString(",") + "]"
-
-}
-*/
 
 case class ListType[ID_TYPE](
                               private val generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
