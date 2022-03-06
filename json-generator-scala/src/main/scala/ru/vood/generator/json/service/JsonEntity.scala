@@ -8,7 +8,7 @@ import scala.math.abs
 
 trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
-//  type ID = ID_TYPE
+  //  type ID = ID_TYPE
 
   def convertHashToID(i: Int): ID_TYPE
 
@@ -25,9 +25,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
   val defaultStr: GenerateFieldValueFunction[ID_TYPE, String] = { (id, nameField) => (id.hashCode + nameField.hashCode).toString }
   val defaultNum: GenerateFieldValueFunction[ID_TYPE, BigDecimal] = { (id, nameField) => id.hashCode + nameField.hashCode }
 
-  val defaultNum2: (Double, Double) => GenerateFieldValueFunction[ID_TYPE, BigDecimal] = defaultNumRange
-
-   def defaultNumRange(min: Double = Double.MinValue, max: Double = Double.MaxValue): GenerateFieldValueFunction[ID_TYPE, BigDecimal] = {
+  def defaultNumRange(min: Double = Double.MinValue, max: Double = Double.MaxValue): GenerateFieldValueFunction[ID_TYPE, BigDecimal] = {
     (id, nameField) => (id.hashCode + nameField.hashCode) % (max - min) + min
   }
 
