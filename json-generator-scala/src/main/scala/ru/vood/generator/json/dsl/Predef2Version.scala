@@ -15,6 +15,13 @@ object Predef2Version {
       override def fields: Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
     }
 
+  @inline def asEntityList[ID_TYPE](elems: MetaProperty[ID_TYPE]*): (Double, NameField) => DataType[ID_TYPE] = { (q, w) =>
+    new JsonEntityMeta[ID_TYPE] {
+      override def fields: Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
+    }
+  }
+
+
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 
     @inline def ->[ID_TYPE](y: String): MetaProperty[ID_TYPE]
@@ -42,8 +49,9 @@ object Predef2Version {
                                 y: (ID_TYPE, NameField) => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
 
-    /*@inline def asObj[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
+    @inline def asObj[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
+    /*
 
     @inline def asStr[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, String]):
     MetaProperty[ID_TYPE] =
