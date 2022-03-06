@@ -29,12 +29,23 @@ case class JsonData() extends AbstractNumberIdentyfyedEntity {
     "str_list" asList(genListCountDefault(1, 2), defaultListStr),
     "num_list" asList(genListCountDefault(1, 2), defaultListNum),
     "bool_list" asList(genListCountDefault(1, 2), defaultListBool),
-    "obj_list" asList(genListCountDefault(1, 2), asEntity(
+
+    "obj_list" asList(genListCountDefault(1, 2),
+
+      asEntity(      "str_fun" asStr defaultStr,
+              "num_fun" asNum defaultNum,
+            )
+      ),
+//    "obj_list" asList(asEntity(      "str_fun" asStr defaultStr,
+//      "num_fun" asNum defaultNum,
+//    ))
+
+    /*"obj_list" asList(asEntity(
       "str_fun" asStr defaultStr,
       "num_fun" asNum defaultNum,
-    )
+    ))()
 
-    ),
+    ,*/
     //    "num_list" asNum defaultNum,
     //    "bool_list" asBool defaultBool,
 
