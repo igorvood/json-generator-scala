@@ -10,6 +10,8 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   //  type ID = ID_TYPE
 
+  val NULL = NullType[ID_TYPE]()
+
   def convertHashToID(i: Int): ID_TYPE
 
 
@@ -47,7 +49,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
     }
     result
   }
-
+  @inline def asJson[ID_TYPE](elems: MetaProperty[ID_TYPE]*): Set[MetaProperty[ID_TYPE]] = Set(elems:_*)
 
   def entityName: String
 

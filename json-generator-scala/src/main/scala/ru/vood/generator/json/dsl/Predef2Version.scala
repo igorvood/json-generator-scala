@@ -8,8 +8,6 @@ object Predef2Version {
 
   type GenerateFieldValueFunction[ID_TYPE, OUT_TYPE] = (ID_TYPE, NameField) => OUT_TYPE
 
-  def NULL[ID_TYPE] = NullType[ID_TYPE]()
-
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 
     @inline def ->[ID_TYPE](y: String): MetaProperty[ID_TYPE]
@@ -32,6 +30,7 @@ object Predef2Version {
 
     @inline def asBool[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, Boolean]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (i, w) => BooleanType(y(i, w)) })
+
 
     /*@inline def asObj[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
