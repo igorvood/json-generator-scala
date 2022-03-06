@@ -12,6 +12,16 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   def convertHashToID(i: Int): ID_TYPE
 
+
+  override def jsonValue(id: ID_TYPE, nameField: NameField): String = {
+    validateMeta
+    val res = meta.property
+      .map(prop =>
+        prop(id))
+      .mkString(sep = ",")
+    s"{$res}"
+  }
+
   val defaultStr: GenerateFieldValueFunction[ID_TYPE, String] = { (id, nameField) => (id.hashCode + nameField.hashCode).toString }
   val defaultNum: GenerateFieldValueFunction[ID_TYPE, BigDecimal] = { (id, nameField) => id.hashCode + nameField.hashCode }
 
