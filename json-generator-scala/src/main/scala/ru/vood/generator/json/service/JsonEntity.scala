@@ -1,6 +1,6 @@
 package ru.vood.generator.json.service
 
-import ru.vood.generator.json.dsl.Predef.{GenerateFieldValueFunction, NameField}
+import ru.vood.generator.json.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
 import ru.vood.generator.json.service
 
 import scala.collection.immutable
@@ -15,6 +15,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
   def convertHashToID(i: Int): ID_TYPE
 
   def jsonValue(id: ID_TYPE): String = jsonValue(id, entityName)
+
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = {
     validateMeta
     val res = meta.property
@@ -45,11 +46,12 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
     val result: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE] = (id, name) => {
       val hash = abs(id.hashCode() + name.hashCode)
       (0 to (hash % (max - min) + min))
-      .map(convertHashToID)
+        .map(convertHashToID)
     }
     result
   }
-  @inline protected def asJson[ID_TYPE](elems: MetaProperty[ID_TYPE]*): Set[MetaProperty[ID_TYPE]] = Set(elems:_*)
+
+  @inline protected def asJson[ID_TYPE](elems: MetaProperty[ID_TYPE]*): Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
 
   def entityName: String
 

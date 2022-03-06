@@ -1,14 +1,12 @@
 package ru.vood.generator.json.dsl
 
+import ru.vood.generator.json.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
 import ru.vood.generator.json.service._
 
 import scala.collection.immutable
 
 object Predef2Version {
 
-  type NameField = String
-
-  type GenerateFieldValueFunction[ID_TYPE, OUT_TYPE] = (ID_TYPE, NameField) => OUT_TYPE
 
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 

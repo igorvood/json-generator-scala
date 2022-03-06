@@ -1,6 +1,6 @@
 package ru.vood.generator.json.service
 
-import ru.vood.generator.json.dsl.Predef.NameField
+import ru.vood.generator.json.dsl.TypeObject.NameField
 
 import java.text.DecimalFormat
 import scala.collection.immutable
