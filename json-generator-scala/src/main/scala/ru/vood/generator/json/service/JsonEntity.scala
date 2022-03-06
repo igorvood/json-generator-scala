@@ -8,7 +8,7 @@ import scala.math.abs
 
 trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
-  type ID = ID_TYPE
+//  type ID = ID_TYPE
 
   def convertHashToID(i: Int): ID_TYPE
 
