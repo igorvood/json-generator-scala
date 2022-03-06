@@ -5,7 +5,6 @@ import ru.vood.generator.json.dsl.Predef.PropAssoc
 import ru.vood.generator.json.service.MetaProperty
 
 case class InternalJsonMeta3(name: String) extends AbstractStringIdentyfyedEntity {
-  override val entityName: String = name
   override val fields: Set[MetaProperty[String]] = Set(
     "str_1" asStr defaultStr,
     "num_2" asNum defaultNum,

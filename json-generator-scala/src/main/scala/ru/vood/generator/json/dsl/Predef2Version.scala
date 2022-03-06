@@ -6,7 +6,14 @@ import ru.vood.generator.json.service._
 import scala.collection.immutable
 
 object Predef2Version {
+  implicit def convertHashToDouble(i: Int): Double = i.toDouble
 
+  implicit def convertHashToString(i: Int): String = i.toString
+
+  @inline def asEntity[ID_TYPE](elems: MetaProperty[ID_TYPE]*): JsonEntityMeta[ID_TYPE] =
+    new JsonEntityMeta[ID_TYPE] {
+      override def fields: Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
+    }
 
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 

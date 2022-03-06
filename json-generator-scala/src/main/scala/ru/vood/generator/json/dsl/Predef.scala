@@ -7,6 +7,11 @@ import scala.collection.immutable
 
 object Predef {
 
+  implicit def convertHashToDouble(i: Int): Double = i.toDouble
+
+  implicit def convertHashToString(i: Int): String = i.toString
+
+
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 
     @inline def asConst[ID_TYPE](y: String): MetaProperty[ID_TYPE] =

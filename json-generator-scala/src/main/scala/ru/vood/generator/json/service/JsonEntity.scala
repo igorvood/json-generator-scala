@@ -20,9 +20,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
   val defaultListStr: (ID_TYPE, NameField) => StringType[ID_TYPE] = { (id, nameField) => StringType(defaultStr(id, nameField)) }
   val defaultListBool: (ID_TYPE, NameField) => BooleanType[ID_TYPE] = { (id, nameField) => BooleanType(defaultBool(id, nameField)) }
 
-  def convertHashToID(i: Int): ID_TYPE
-
-  def jsonValue(id: ID_TYPE): String = jsonValue(id, entityName)
+  def jsonValue(id: ID_TYPE): String = jsonValue(id, "entityName")
 
   override def jsonValue(id: ID_TYPE, nameField: NameField): String = {
     validateMeta
@@ -33,7 +31,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
     s"{$res}"
   }
 
-  protected def meta: MetaEntity[ID_TYPE] = service.MetaEntity(entityName, fields)
+  protected def meta: MetaEntity[ID_TYPE] = service.MetaEntity("entityName", fields)
 
   def validateMeta(): Unit = {
     if (badFields.nonEmpty)
@@ -49,11 +47,9 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
     (id, nameField) => (id.hashCode + nameField.hashCode) % (max - min) + min
   }
 
-  def entityName: String
-
   def fields: Set[MetaProperty[ID_TYPE]]
 
-  protected def genListCountDefault(min: Int = 1, max: Int = 3): (ID_TYPE, NameField) => immutable.Seq[ID_TYPE] = {
+  protected def genListCountDefault(min: Int = 1, max: Int = 3)(implicit convertHashToID: Int => ID_TYPE): (ID_TYPE, NameField) => immutable.Seq[ID_TYPE] = {
     require(min <= max)
     require(min >= 0)
     require(max >= 0)
