@@ -18,18 +18,6 @@ object Predef2Version {
 
   @inline def asEntityProp[ID_TYPE](elems: MetaProperty[ID_TYPE]*): Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
 
-  /*implicit final class SetAdds[ID_TYPE](self: Set[MetaProperty[ID_TYPE]]) {
-
-    @inline def genCount(genFun: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE]): MetaProperty[ID_TYPE] = {
-      val meta = new JsonEntityMeta[ID_TYPE] {
-        override def fields: Set[MetaProperty[ID_TYPE]] = self
-      }
-      val list = ListType(genFun, { (q: ID_TYPE, w: NameField) => meta })
-      val value = MetaProperty("self", { (v1: ID_TYPE, v2: NameField) => list })
-      value
-    }
-  }*/
-
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 
     @inline def ->[ID_TYPE](y: String): MetaProperty[ID_TYPE]
@@ -45,25 +33,29 @@ object Predef2Version {
       MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
 
     @inline def asStr[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, String]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (i, w) => StringType(y(i, w)) })
+      as[ID_TYPE, String](qw = { (i, w) => StringType(y(i, w)) })
 
     @inline def asNum[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, BigDecimal]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (i, w) => NumberType(y(i, w)) })
+      as[ID_TYPE, BigDecimal](qw = { (i, w) => NumberType(y(i, w)) })
 
     @inline def asBool[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, Boolean]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (i, w) => BooleanType(y(i, w)) })
+      as[ID_TYPE, Boolean](qw = { (i, w) => BooleanType(y(i, w)) })
 
     @deprecated
-    @inline def asList[ID_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], y: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, { (q, w) => y }) })
+    @inline def asBoolNew[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, Boolean]): MetaProperty[ID_TYPE] =
+      as[ID_TYPE, Boolean](qw = { (i, w) => BooleanType(y(i, w)) })
 
+    @inline private def as[ID_TYPE, OUT_TYPE](qw: GenerateFieldValueFunction[ID_TYPE, DataType[ID_TYPE]]): MetaProperty[ID_TYPE] =
+      MetaProperty(self, { (i, w) => qw(i, w) })
+
+    //======================================================================================
     @inline def asListEntity[ID_TYPE](y: Set[MetaProperty[ID_TYPE]]): MetaEntity[ID_TYPE] = MetaEntity(self, y)
 
-    @deprecated
-    @inline def asList[ID_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
-                                y: (ID_TYPE, NameField) => DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
+    @inline def asList[ID_TYPE](y: (ID_TYPE, NameField) => DataType[ID_TYPE],
+                                generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
 
+    //======================================================================================
     @deprecated
     @inline def asObj[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
