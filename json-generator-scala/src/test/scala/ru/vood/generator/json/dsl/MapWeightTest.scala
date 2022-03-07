@@ -12,23 +12,23 @@ class MapWeightTest extends AnyFlatSpec with should.Matchers {
     val weight = MapWeight(dict)
 
     assert(weight.getValue(0) == "val1")
-    assert(weight.getValue(32) == "val1")
-    assert(weight.getValue(33) == "val2")
-    assert(weight.getValue(34) == "val2")
-    assert(weight.getValue(65) == "val2")
-    assert(weight.getValue(66) == "val3")
-    assert(weight.getValue(99) == "val3")
-    assert(weight.getValue(100) == "val1")
+    assert(weight.getValue(3332) == "val1")
+    assert(weight.getValue(3333) == "val2")
+    assert(weight.getValue(3334) == "val2")
+    assert(weight.getValue(6665) == "val2")
+    assert(weight.getValue(6666) == "val3")
+    assert(weight.getValue(9999) == "val3")
+    assert(weight.getValue(10000) == "val1")
 
 
     assert(weight.getValue(0) == "val1")
-    assert(weight.getValue(-32) == "val1")
-    assert(weight.getValue(-33) == "val2")
-    assert(weight.getValue(-34) == "val2")
-    assert(weight.getValue(-65) == "val2")
-    assert(weight.getValue(-66) == "val3")
-    assert(weight.getValue(-99) == "val3")
-    assert(weight.getValue(-100) == "val1")
+    assert(weight.getValue(-3332) == "val1")
+    assert(weight.getValue(-3333) == "val2")
+    assert(weight.getValue(-3334) == "val2")
+    assert(weight.getValue(-6665) == "val2")
+    assert(weight.getValue(-6666) == "val3")
+    assert(weight.getValue(-9999) == "val3")
+    assert(weight.getValue(-10000) == "val1")
 
 
   }
