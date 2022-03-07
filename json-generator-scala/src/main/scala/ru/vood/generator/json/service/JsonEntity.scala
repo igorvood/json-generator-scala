@@ -61,7 +61,12 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
     result
   }
 
-  @inline protected def asJson[ID_TYPE](elems: MetaProperty[ID_TYPE]*): Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
 
 
+
+}
+
+object JsonEntityMeta{
+
+  @inline def asJson[ID_TYPE](elems: MetaProperty[ID_TYPE]*): Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
 }

@@ -3,6 +3,7 @@ package ru.vood.generator.json.secondVersion
 import ru.vood.generator.json.abstraction.AbstractNumberIdentyfyedEntity
 import ru.vood.generator.json.dsl.Predef2Version.{PropAssoc, asEntity}
 import ru.vood.generator.json.dsl.TypeObject.NameField
+import ru.vood.generator.json.service.JsonEntityMeta.asJson
 import ru.vood.generator.json.service.{DataType, MetaProperty}
 
 case class JsonData() extends AbstractNumberIdentyfyedEntity {
@@ -22,7 +23,7 @@ case class JsonData() extends AbstractNumberIdentyfyedEntity {
     "str_fun" asStr defaultStr,
     "num_fun" asNum defaultNum,
     "bool_fun" asBool defaultBool,
-    "obj_fun" asObj asEntity(
+    "obj_fun" asEntity(
       "str_fun" asStr defaultStr,
       "num_fun" asNum defaultNum,
     ),
@@ -32,13 +33,13 @@ case class JsonData() extends AbstractNumberIdentyfyedEntity {
 
     "obj_list" asList(genListCountDefault(1, 2),
 
-      asEntity(      "str_fun" asStr defaultStr,
-              "num_fun" asNum defaultNum,
-            )
-      ),
-//    "obj_list" asList(asEntity(      "str_fun" asStr defaultStr,
-//      "num_fun" asNum defaultNum,
-//    ))
+      asEntity("str_fun" asStr defaultStr,
+        "num_fun" asNum defaultNum,
+      )
+    ),
+    //    "obj_list" asList(asEntity(      "str_fun" asStr defaultStr,
+    //      "num_fun" asNum defaultNum,
+    //    ))
 
     /*"obj_list" asList(asEntity(
       "str_fun" asStr defaultStr,
