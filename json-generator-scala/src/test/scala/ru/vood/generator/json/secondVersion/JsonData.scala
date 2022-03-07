@@ -1,7 +1,7 @@
 package ru.vood.generator.json.secondVersion
 
 import ru.vood.generator.json.abstraction.AbstractNumberIdentyfyedEntity
-import ru.vood.generator.json.dsl.Predef2Version.{PropAssoc, SetAdds, asEntity, asEntityProp}
+import ru.vood.generator.json.dsl.Predef2Version.{PropAssoc, asEntity, asEntityProp}
 import ru.vood.generator.json.dsl.TypeObject.NameField
 import ru.vood.generator.json.service.JsonEntityMeta.asJson
 import ru.vood.generator.json.service.{DataType, MetaProperty}
@@ -16,7 +16,7 @@ case class JsonData() extends AbstractNumberIdentyfyedEntity {
   }
 
   override def fields: Set[MetaProperty[Double]] = asJson(
-    /*"str_const" -> "asdsad",
+    "str_const" -> "asdsad",
     "num_const" -> 123,
     "bool_const" -> true,
     "null_const" -> NULL,
@@ -36,9 +36,9 @@ case class JsonData() extends AbstractNumberIdentyfyedEntity {
       asEntity("str_fun" asStr defaultStr,
         "num_fun" asNum defaultNum,
       )
-    ),*/
+    ),
 
-    "obj_list_new" asList asEntityProp(
+    "obj_list_new" asListEntity asEntityProp(
       "str_fun" asStr defaultStr,
       "num_fun" asNum defaultNum,
     ) genCount genListCountDefault(1, 2)

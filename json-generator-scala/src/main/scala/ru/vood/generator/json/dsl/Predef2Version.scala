@@ -18,7 +18,7 @@ object Predef2Version {
 
   @inline def asEntityProp[ID_TYPE](elems: MetaProperty[ID_TYPE]*): Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
 
-  implicit final class SetAdds[ID_TYPE](self: Set[MetaProperty[ID_TYPE]]) {
+  /*implicit final class SetAdds[ID_TYPE](self: Set[MetaProperty[ID_TYPE]]) {
 
     @inline def genCount(genFun: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE]): MetaProperty[ID_TYPE] = {
       val meta = new JsonEntityMeta[ID_TYPE] {
@@ -28,7 +28,7 @@ object Predef2Version {
       val value = MetaProperty("self", { (v1: ID_TYPE, v2: NameField) => list })
       value
     }
-  }
+  }*/
 
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 
@@ -57,7 +57,7 @@ object Predef2Version {
     @inline def asList[ID_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE], y: JsonEntityMeta[ID_TYPE]): MetaProperty[ID_TYPE] =
       MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, { (q, w) => y }) })
 
-    @inline def asList[ID_TYPE](y: Set[MetaProperty[ID_TYPE]]): Set[MetaProperty[ID_TYPE]] = y
+    @inline def asListEntity[ID_TYPE](y: Set[MetaProperty[ID_TYPE]]): MetaEntity[ID_TYPE] = MetaEntity(self, y)
 
     @deprecated
     @inline def asList[ID_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE],
