@@ -58,36 +58,20 @@ object Predef2Version {
       MetaProperty(self, (v1: ID_TYPE, v2: NameField) => entityMeta)
     }
 
-
     @inline def fromDict[ID_TYPE](dict: Set[String]): MetaProperty[ID_TYPE] = {
-
-      val map = (0 until dict.size)
-        .map(i => {
-          val i1 = if (i < dict.size - 1) 100 / dict.size else (100 - 100 / dict.size * (dict.size - 1))
-          (dict.toList(i), i1)
-        }
-        ).toMap
-      val weight = MapWeight(map)
-
       val function = new GenerateFieldValueFunction[ID_TYPE, StringType[ID_TYPE]] {
-        override def apply(v1: ID_TYPE, v2: NameField): StringType[ID_TYPE] = {
-          val i = abs(v1.hashCode() + v2.hashCode) % 100
-          i
-          ???
-        }
+        override def apply(v1: ID_TYPE, v2: NameField): StringType[ID_TYPE] =
+          StringType(MapWeight(dict).getValue(v1.hashCode() + v2.hashCode))
       }
-
-      /*val strings =
-        for {i <- 0 until dict.size
-                   persent <-  (list(i), step*i)
-
-                         } yield {
-        "persent"
-      }*/
-
-
       as[ID_TYPE, String](qw = function)
-      ???
+    }
+
+    @inline def fromDict[ID_TYPE](dict: Map[String, Double]): MetaProperty[ID_TYPE] = {
+      val function = new GenerateFieldValueFunction[ID_TYPE, StringType[ID_TYPE]] {
+        override def apply(v1: ID_TYPE, v2: NameField): StringType[ID_TYPE] =
+          StringType(MapWeight(dict).getValue(v1.hashCode() + v2.hashCode))
+      }
+      as[ID_TYPE, String](qw = function)
     }
 
 

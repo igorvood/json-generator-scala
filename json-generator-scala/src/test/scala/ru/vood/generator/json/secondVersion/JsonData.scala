@@ -19,9 +19,12 @@ case class JsonData() extends AbstractNumberIdentyfyedEntity {
       "str_fun" asStr defaultStr,
       "num_fun" asNum defaultNum,
     ),
-//    "str_list" asList(defaultListStr, genListCountDefault(1, 2)),
-//    "num_list" asList(defaultListNum, genListCountDefault(1, 2)),
-//    "bool_list" asList(defaultListBool, genListCountDefault(1, 2)),
+    "dict_set" fromDict Set("val1", "val2", "val3"),
+    "dict_map" fromDict Map(("val1", 0.01d), ("val2", 0.01d), ("val3", 99.98d)),
+
+//        "str_list" asList(defaultListStrF, genListCountDefault(1, 2)),
+    //    "num_list" asList(defaultListNum, genListCountDefault(1, 2)),
+    //    "bool_list" asList(defaultListBool, genListCountDefault(1, 2)),
 
     //    "str_list_new" asListSimple(defaultListStr, genListCountDefault(6, 8)),
 
