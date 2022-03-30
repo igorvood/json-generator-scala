@@ -1,4 +1,4 @@
-package ru.vood.generator.json.service
+package ru.vood.generator.json.custom.service
 
 import ru.vood.generator.json.dsl.TypeObject.NameField
 

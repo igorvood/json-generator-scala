@@ -1,7 +1,8 @@
 package ru.vood.generator.json.dsl
 
+import ru.vood.generator.json.custom.service
+import ru.vood.generator.json.custom.service.{BooleanType, DataType, JsonEntityMeta, ListType, MapType, MetaEntity, MetaProperty, NumberType, StringType}
 import ru.vood.generator.json.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
-import ru.vood.generator.json.service._
 
 import scala.collection.immutable
 import scala.language.implicitConversions
@@ -22,16 +23,16 @@ object Predef2Version {
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 
     @inline def ->[ID_TYPE](y: String): MetaProperty[ID_TYPE]
-    = MetaProperty(self, (v1: ID_TYPE, v2: NameField) => StringType(y))
+    = service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => StringType(y))
 
     @inline def ->[ID_TYPE](y: BigDecimal): MetaProperty[ID_TYPE] =
-      MetaProperty(self, (v1: ID_TYPE, v2: NameField) => NumberType(y))
+      service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => NumberType(y))
 
     @inline def ->[ID_TYPE](y: Boolean): MetaProperty[ID_TYPE] =
-      MetaProperty(self, (v1: ID_TYPE, v2: NameField) => BooleanType(y))
+      service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => BooleanType(y))
 
     @inline def ->[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
+      service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
 
     @inline def asStr[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, String]): MetaProperty[ID_TYPE] =
       as[ID_TYPE, String](qw = { (i, w) => StringType(y(i, w)) })
@@ -43,19 +44,19 @@ object Predef2Version {
       as[ID_TYPE, Boolean](qw = { (i, w) => BooleanType(y(i, w)) })
 
     @inline private def as[ID_TYPE, OUT_TYPE](qw: GenerateFieldValueFunction[ID_TYPE, DataType[ID_TYPE]]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (i, w) => qw(i, w) })
+      service.MetaProperty(self, { (i, w) => qw(i, w) })
 
     @inline def asList[ID_TYPE](y: Set[MetaProperty[ID_TYPE]]): MetaEntity[ID_TYPE] = MetaEntity(self, y)
 
     @inline def asList[ID_TYPE](y: (ID_TYPE, NameField) => DataType[ID_TYPE])
                                (implicit generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
+      service.MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
 
     @inline def asObj[ID_TYPE](elems: MetaProperty[ID_TYPE]*): MetaProperty[ID_TYPE] = {
       val entityMeta = new JsonEntityMeta[ID_TYPE] {
         override def fields: Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
       }
-      MetaProperty(self, (v1: ID_TYPE, v2: NameField) => entityMeta)
+      service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => entityMeta)
     }
 
     @inline def fromDict[ID_TYPE](dict: Set[String]): MetaProperty[ID_TYPE] = {
@@ -77,7 +78,7 @@ object Predef2Version {
 
     @inline def asMap[ID_TYPE, KEY_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE],
                                          y: (KEY_TYPE, NameField) => DataType[KEY_TYPE]): MetaProperty[ID_TYPE] =
-      MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapType(generateId, y) })
+      service.MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapType(generateId, y) })
   }
 
 }
