@@ -1,4 +1,4 @@
-package ru.vood.generator.json.abstraction
+package ru.vood.generator.json.custom.abstraction
 
 import ru.vood.generator.json.service.JsonEntityMeta
 

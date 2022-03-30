@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit
 
 class RundomTest extends AnyFlatSpec with should.Matchers {
 
-  "json different json test" should "be called" in {
+  "high load test" should "be called" in {
 
     val timeStart = LocalDateTime.now()
 
@@ -30,7 +30,7 @@ class RundomTest extends AnyFlatSpec with should.Matchers {
     val timeEnd = LocalDateTime.now()
     val d = ChronoUnit.NANOS.between(timeStart, timeEnd) / 1000000000d
     println(d + " sec")
-    assert(d <= 3)
+    assert(d <= 4)
 
   }
 

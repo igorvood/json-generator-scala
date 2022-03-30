@@ -1,6 +1,6 @@
 package ru.vood.generator.json.somemodel
 
-import ru.vood.generator.json.abstraction.AbstractStringIdentyfyedEntity
+import ru.vood.generator.json.custom.abstraction.AbstractStringIdentyfyedEntity
 
 case class MapMeta(name: String) extends AbstractStringIdentyfyedEntity {
   override def fields = Set(

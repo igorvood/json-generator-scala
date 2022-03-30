@@ -1,6 +1,6 @@
 package ru.vood.generator.json.somemodel
 
-import ru.vood.generator.json.abstraction.AbstractStringIdentyfyedEntity
+import ru.vood.generator.json.custom.abstraction.AbstractStringIdentyfyedEntity
 import ru.vood.generator.json.dsl.Predef.PropAssoc
 
 case class ConstMeta(name: String) extends AbstractStringIdentyfyedEntity {
