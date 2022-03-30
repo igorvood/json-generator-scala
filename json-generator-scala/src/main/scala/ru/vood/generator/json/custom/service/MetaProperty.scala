@@ -7,6 +7,6 @@ case class MetaProperty[ID_TYPE](
                                   function: GenerateFieldValueFunction[ID_TYPE, DataType[ID_TYPE]]
                                 ) {
 
-  def apply(id: ID_TYPE): String = "\"" + nameField + "\"" + s": ${function(id, nameField).jsonValue(id, nameField)}"
+  def apply(id: ID_TYPE): String = "\"" + nameField + "\"" + s": ${function(id, nameField).jsonValueStr(id, nameField)}"
 
 }

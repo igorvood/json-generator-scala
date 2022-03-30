@@ -12,8 +12,8 @@ class Test extends AnyFlatSpec with should.Matchers {
 
   "json DslJsonRandomMeta determenistic test" should "be called" in {
     val asd = DslJsonRandomMeta("asd")
-    val str1 = asd.jsonValue("asd")
-    val str = asd.jsonValue("asd")
+    val str1 = asd.jsonValueStr("asd")
+    val str = asd.jsonValueStr("asd")
 
     assert(str == str1)
     println(str1)
@@ -23,8 +23,8 @@ class Test extends AnyFlatSpec with should.Matchers {
     val key = "asd"
     val asd = DslJsonRandomMeta("asd")
 
-    val str1 = asd.jsonValue(key)
-    val str = asd.jsonValue(key + 1)
+    val str1 = asd.jsonValueStr(key)
+    val str = asd.jsonValueStr(key + 1)
 
     assert(str != str1)
     println(str1)
@@ -34,8 +34,8 @@ class Test extends AnyFlatSpec with should.Matchers {
     val key = "asd"
     val asd = ListSimple(key)
 
-    val str1 = asd.jsonValue(key)
-    val str = asd.jsonValue(key)
+    val str1 = asd.jsonValueStr(key)
+    val str = asd.jsonValueStr(key)
 
     assert(str == str1)
     println(str1)
@@ -45,8 +45,8 @@ class Test extends AnyFlatSpec with should.Matchers {
     val key = "asd"
     val asd = ListObject(key)
 
-    val str1 = asd.jsonValue(key)
-    val str = asd.jsonValue(key)
+    val str1 = asd.jsonValueStr(key)
+    val str = asd.jsonValueStr(key)
 
     assert(str == str1)
     println(str1)
@@ -55,11 +55,11 @@ class Test extends AnyFlatSpec with should.Matchers {
   ignore should "json DslJsonRandomMeta random by name test be called" in {
     val key = "asd"
     val asd = DslJsonRandomMeta(key)
-    val str1 = asd.jsonValue(key)
+    val str1 = asd.jsonValueStr(key)
 
 
     val asd1 = DslJsonRandomMeta(key + "1111111")
-    val str = asd1.jsonValue(key)
+    val str = asd1.jsonValueStr(key)
 
     assert(str != str1)
     println(str)
@@ -68,8 +68,8 @@ class Test extends AnyFlatSpec with should.Matchers {
 
   "json const" should "be called" in {
     val asd = ConstMeta("asd")
-    val str1 = asd.jsonValue("asd")
-    val str = asd.jsonValue("asd2")
+    val str1 = asd.jsonValueStr("asd")
+    val str = asd.jsonValueStr("asd2")
 
 
     assert(str == str1)

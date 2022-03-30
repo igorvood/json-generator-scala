@@ -8,7 +8,7 @@ class SecondVersionDslTest extends AnyFlatSpec with should.Matchers {
 
   "json DslJsonRandomMeta determenistic test" should "be called" in {
     val asd = JsonData()
-    val str1 = asd.jsonValue(1)
+    val str1 = asd.jsonValueStr(1)
 
     println(str1)
   }

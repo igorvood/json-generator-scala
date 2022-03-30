@@ -16,7 +16,7 @@ class RundomTest extends AnyFlatSpec with should.Matchers {
     val asd = DslJsonRandomMeta("asd")
     val jsons = (1 to 100000)
       .map(_.toString)
-      .map(asd.jsonValue)
+      .map(asd.jsonValueStr)
       .groupBy(_.hashCode)
 
     val intToInt = jsons

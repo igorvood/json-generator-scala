@@ -1,8 +1,8 @@
 package ru.vood.generator.json.custom.service
 
+import play.api.libs.json.JsValue
 import ru.vood.generator.json.custom.service
 import ru.vood.generator.json.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
-
 
 import scala.collection.immutable
 import scala.math.abs
@@ -21,9 +21,14 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
   val defaultListStr: (ID_TYPE, NameField) => StringType[ID_TYPE] = { (id, nameField) => StringType(defaultStr(id, nameField)) }
   val defaultListBool: (ID_TYPE, NameField) => BooleanType[ID_TYPE] = { (id, nameField) => BooleanType(defaultBool(id, nameField)) }
 
-  def jsonValue(id: ID_TYPE): String = jsonValue(id, "entityName")
+  def jsonValueStr(id: ID_TYPE): String = jsonValueStr(id, "entityName")
 
-  override def jsonValue(id: ID_TYPE, nameField: NameField): String = {
+  def jsValue(id: ID_TYPE): JsValue ={
+
+    ???
+  }
+
+  override def jsonValueStr(id: ID_TYPE, nameField: NameField): String = {
     validateMeta
     val res = meta.property
       .map(prop =>
