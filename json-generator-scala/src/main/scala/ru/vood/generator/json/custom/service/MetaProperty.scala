@@ -1,6 +1,6 @@
 package ru.vood.generator.json.custom.service
 
-import ru.vood.generator.json.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
+import ru.vood.generator.json.custom.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
 
 case class MetaProperty[ID_TYPE](
                                   nameField: NameField,

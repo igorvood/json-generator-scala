@@ -2,7 +2,7 @@ package ru.vood.generator.json.dsl
 
 import ru.vood.generator.json.custom.service
 import ru.vood.generator.json.custom.service.{BooleanType, DataType, ListType, MapType, MetaProperty, NullType, NumberType, StringType}
-import ru.vood.generator.json.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
+import ru.vood.generator.json.custom.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
 
 import scala.collection.immutable
 

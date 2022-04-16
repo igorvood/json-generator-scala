@@ -1,4 +1,4 @@
-package ru.vood.generator.json.dsl
+package ru.vood.generator.json.custom.dsl
 
 object TypeObject {
 

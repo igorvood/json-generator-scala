@@ -1,6 +1,6 @@
 package ru.vood.generator.json.custom.service
 
-import ru.vood.generator.json.dsl.TypeObject.NameField
+import ru.vood.generator.json.custom.dsl.TypeObject.NameField
 
 import java.text.DecimalFormat
 import scala.collection.immutable
