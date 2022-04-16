@@ -7,6 +7,7 @@ import ru.vood.generator.json.custom.service._
 import scala.collection.immutable
 import scala.language.implicitConversions
 
+@deprecated
 object Predef {
 
   implicit def convertHashToDouble(i: Int): Double = i.toDouble
