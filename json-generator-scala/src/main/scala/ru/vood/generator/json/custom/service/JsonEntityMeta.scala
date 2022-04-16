@@ -39,7 +39,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   protected def meta: MetaEntity[ID_TYPE] = service.MetaEntity("entityName", fields)
 
-  def validateMeta(): Unit = {
+  protected def validateMeta(): Unit = {
     if (badFields.nonEmpty)
       throw new IllegalStateException(s"meta is not valid fields is duplicate $badFields")
   }
