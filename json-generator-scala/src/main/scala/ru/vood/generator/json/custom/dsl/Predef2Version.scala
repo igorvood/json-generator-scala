@@ -1,12 +1,12 @@
 package ru.vood.generator.json.dsl
 
+import ru.vood.generator.json.custom.dsl.MapWeight
 import ru.vood.generator.json.custom.service
-import ru.vood.generator.json.custom.service.{BooleanType, DataType, JsonEntityMeta, ListType, MapType, MetaEntity, MetaProperty, NumberType, StringType}
+import ru.vood.generator.json.custom.service._
 import ru.vood.generator.json.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
 
 import scala.collection.immutable
 import scala.language.implicitConversions
-import scala.math.abs
 
 object Predef2Version {
   implicit def convertHashToDouble(i: Int): Double = i.toDouble

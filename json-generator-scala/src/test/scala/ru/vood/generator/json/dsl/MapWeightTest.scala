@@ -2,6 +2,7 @@ package ru.vood.generator.json.dsl
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
+import ru.vood.generator.json.custom.dsl.MapWeight
 
 class MapWeightTest extends AnyFlatSpec with should.Matchers {
 
