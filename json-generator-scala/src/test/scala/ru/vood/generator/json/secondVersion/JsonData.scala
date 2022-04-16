@@ -1,11 +1,11 @@
 package ru.vood.generator.json.secondVersion
 
-import ru.vood.generator.json.custom.abstraction.AbstractNumberIdentyfyedEntity
+import ru.vood.generator.json.custom.abstraction.AbstractNumberIdentyfydEntity
 import ru.vood.generator.json.custom.service.MetaProperty
 import ru.vood.generator.json.dsl.Predef2Version.{PropAssoc, asEntityProp}
 import ru.vood.generator.json.custom.service.JsonEntityMeta.asJson
 
-case class JsonData() extends AbstractNumberIdentyfyedEntity {
+case class JsonData() extends AbstractNumberIdentyfydEntity {
 
   override def fields: Set[MetaProperty[Double]] = asJson(
     "str_const" -> "asdsad",
