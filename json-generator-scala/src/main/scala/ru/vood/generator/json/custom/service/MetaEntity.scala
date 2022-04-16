@@ -12,8 +12,8 @@ case class MetaEntity[ID_TYPE](name: String,
     val meta = new JsonEntityMeta[ID_TYPE] {
       override def fields: Set[MetaProperty[ID_TYPE]] = property
     }
-    val list = ListType(genFun, { (q: ID_TYPE, w: NameField) => meta })
-    val value = MetaProperty(name, { (v1: ID_TYPE, v2: NameField) => list })
+    val list = ListType(genFun, { (_: ID_TYPE, _: NameField) => meta })
+    val value = MetaProperty(name, { (_: ID_TYPE, _: NameField) => list })
     value
   }
 }

@@ -22,16 +22,16 @@ object Predef2Version {
   implicit final class PropAssoc(private val self: String) extends AnyVal {
 
     @inline def ->[ID_TYPE](y: String): MetaProperty[ID_TYPE]
-    = service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => StringType(y))
+    = service.MetaProperty(self, (_: ID_TYPE, _: NameField) => StringType(y))
 
     @inline def ->[ID_TYPE](y: BigDecimal): MetaProperty[ID_TYPE] =
-      service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => NumberType(y))
+      service.MetaProperty(self, (_: ID_TYPE, _: NameField) => NumberType(y))
 
     @inline def ->[ID_TYPE](y: Boolean): MetaProperty[ID_TYPE] =
-      service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => BooleanType(y))
+      service.MetaProperty(self, (_: ID_TYPE, _: NameField) => BooleanType(y))
 
     @inline def ->[ID_TYPE](y: DataType[ID_TYPE]): MetaProperty[ID_TYPE] =
-      service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => y)
+      service.MetaProperty(self, (_: ID_TYPE, _: NameField) => y)
 
     @inline def asStr[ID_TYPE](y: GenerateFieldValueFunction[ID_TYPE, String]): MetaProperty[ID_TYPE] =
       as[ID_TYPE, String](qw = { (i, w) => StringType(y(i, w)) })
@@ -49,13 +49,13 @@ object Predef2Version {
 
     @inline def asList[ID_TYPE](y: (ID_TYPE, NameField) => DataType[ID_TYPE])
                                (implicit generateId: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE]): MetaProperty[ID_TYPE] =
-      service.MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => ListType(generateId, y) })
+      service.MetaProperty(self, { (_: ID_TYPE, _: NameField) => ListType(generateId, y) })
 
     @inline def asObj[ID_TYPE](elems: MetaProperty[ID_TYPE]*): MetaProperty[ID_TYPE] = {
       val entityMeta = new JsonEntityMeta[ID_TYPE] {
         override def fields: Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
       }
-      service.MetaProperty(self, (v1: ID_TYPE, v2: NameField) => entityMeta)
+      service.MetaProperty(self, (_: ID_TYPE, _: NameField) => entityMeta)
     }
 
     @inline def fromDict[ID_TYPE](dict: Set[String]): MetaProperty[ID_TYPE] = {
@@ -77,7 +77,7 @@ object Predef2Version {
 
     @inline def asMap[ID_TYPE, KEY_TYPE](generateId: (ID_TYPE, NameField) => immutable.Seq[KEY_TYPE],
                                          y: (KEY_TYPE, NameField) => DataType[KEY_TYPE]): MetaProperty[ID_TYPE] =
-      service.MetaProperty(self, { (v1: ID_TYPE, v2: NameField) => MapType(generateId, y) })
+      service.MetaProperty(self, { (_: ID_TYPE, _: NameField) => MapType(generateId, y) })
   }
 
 }

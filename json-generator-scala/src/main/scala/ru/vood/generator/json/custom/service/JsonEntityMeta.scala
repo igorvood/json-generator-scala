@@ -41,7 +41,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   def validateMeta(): Unit = {
     if (badFields.nonEmpty)
-      throw new IllegalStateException(s"meta is not valid fields is dublicate $badFields")
+      throw new IllegalStateException(s"meta is not valid fields is duplicate $badFields")
   }
 
   private def badFields = fields
