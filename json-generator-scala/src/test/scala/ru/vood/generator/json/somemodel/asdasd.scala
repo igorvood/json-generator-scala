@@ -2,8 +2,8 @@ package ru.vood.generator.json.somemodel
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
-import play.api.libs.json.{JsArray, JsNull, JsNumber, JsObject, JsString, JsValue, Json}
 import play.api.libs.json._
+
 class asdasd extends AnyFlatSpec with should.Matchers {
 
 
@@ -33,21 +33,21 @@ class asdasd extends AnyFlatSpec with should.Matchers {
 
     val json1: JsValue = JsObject(
       Seq(
-        "name"     -> JsString("Watership Down"),
+        "name" -> JsString("Watership Down"),
         "location" -> JsObject(Seq("lat" -> JsNumber(51.235685), "long" -> JsNumber(-1.309197))),
         "residents" -> JsArray(
           IndexedSeq(
             JsObject(
               Seq(
                 "name" -> JsString("Fiver"),
-                "age"  -> JsNumber(4),
+                "age" -> JsNumber(4),
                 "role" -> JsNull
               )
             ),
             JsObject(
               Seq(
                 "name" -> JsString("Bigwig"),
-                "age"  -> JsNumber(6),
+                "age" -> JsNumber(6),
                 "role" -> JsString("Owsla")
               )
             )

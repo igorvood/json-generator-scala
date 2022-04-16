@@ -1,7 +1,7 @@
 package ru.vood.generator.json.somemodel
 
 import ru.vood.generator.json.custom.abstraction.AbstractStringIdentyfyEntity
-import ru.vood.generator.json.dsl.Predef.PropAssoc
+import ru.vood.generator.json.custom.dsl.Predef.PropAssoc
 
 case class ConstMeta(name: String) extends AbstractStringIdentyfyEntity {
   override def fields = Set(
