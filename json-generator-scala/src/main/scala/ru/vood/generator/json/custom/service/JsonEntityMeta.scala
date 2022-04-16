@@ -1,8 +1,8 @@
 package ru.vood.generator.json.custom.service
 
 import play.api.libs.json.JsValue
-import ru.vood.generator.json.custom.service
 import ru.vood.generator.json.custom.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
+import ru.vood.generator.json.custom.service
 
 import scala.collection.immutable
 import scala.math.abs
@@ -11,7 +11,7 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   //  type ID = ID_TYPE
 
-  val NULL = NullType[ID_TYPE]()
+  val NULL: NullType[ID_TYPE] = NullType[ID_TYPE]()
   val defaultStr: GenerateFieldValueFunction[ID_TYPE, String] = { (id, nameField) => (id.hashCode + nameField.hashCode).toString }
   val defaultNum: GenerateFieldValueFunction[ID_TYPE, BigDecimal] = { (id, nameField) => id.hashCode + nameField.hashCode }
   val defaultBool: GenerateFieldValueFunction[ID_TYPE, Boolean] = { (id, nameField) =>
@@ -23,13 +23,13 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
 
   def jsonValueStr(id: ID_TYPE): String = jsonValueStr(id, "entityName")
 
-  def jsValue(id: ID_TYPE): JsValue ={
+  def jsValue(id: ID_TYPE): JsValue = {
 
     ???
   }
 
   override def jsonValueStr(id: ID_TYPE, nameField: NameField): String = {
-    validateMeta
+    validateMeta()
     val res = meta.property
       .map(prop =>
         prop(id))
@@ -68,11 +68,9 @@ trait JsonEntityMeta[ID_TYPE] extends DataType[ID_TYPE] {
   }
 
 
-
-
 }
 
-object JsonEntityMeta{
+object JsonEntityMeta {
 
   @inline def asJson[ID_TYPE](elems: MetaProperty[ID_TYPE]*): Set[MetaProperty[ID_TYPE]] = Set(elems: _*)
 }

@@ -5,5 +5,4 @@ import ru.vood.generator.json.custom.service.JsonEntityMeta
 abstract class AbstractStringIdentyfyEntity extends JsonEntityMeta[String] {
 
 
-
 }

@@ -1,8 +1,8 @@
 package ru.vood.generator.json.custom.dsl
 
-import ru.vood.generator.json.custom.service
-import ru.vood.generator.json.custom.service.{BooleanType, DataType, ListType, MapType, MetaProperty, NullType, NumberType, StringType}
 import ru.vood.generator.json.custom.dsl.TypeObject.{GenerateFieldValueFunction, NameField}
+import ru.vood.generator.json.custom.service
+import ru.vood.generator.json.custom.service._
 
 import scala.collection.immutable
 import scala.language.implicitConversions

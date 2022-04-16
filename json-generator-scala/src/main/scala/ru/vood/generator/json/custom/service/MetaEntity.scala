@@ -6,7 +6,7 @@ import scala.collection.immutable
 
 case class MetaEntity[ID_TYPE](name: String,
                                property: Set[MetaProperty[ID_TYPE]]
-                              ){
+                              ) {
 
   @inline def genCount(genFun: (ID_TYPE, NameField) => immutable.Seq[ID_TYPE]): MetaProperty[ID_TYPE] = {
     val meta = new JsonEntityMeta[ID_TYPE] {
