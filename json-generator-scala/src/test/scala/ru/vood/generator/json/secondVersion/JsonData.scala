@@ -1,9 +1,9 @@
 package ru.vood.generator.json.secondVersion
 
 import ru.vood.generator.json.custom.abstraction.AbstractNumberIdentyfydEntity
-import ru.vood.generator.json.custom.service.MetaProperty
 import ru.vood.generator.json.custom.dsl.Predef2Version.{PropAssoc, asEntityProp}
 import ru.vood.generator.json.custom.service.JsonEntityMeta.asJson
+import ru.vood.generator.json.custom.service.MetaProperty
 
 case class JsonData() extends AbstractNumberIdentyfydEntity {
 
@@ -22,9 +22,11 @@ case class JsonData() extends AbstractNumberIdentyfydEntity {
     "dict_set" fromDict Set("val1", "val2", "val3"),
     "dict_map" fromDict Map(("val1", 0.01d), ("val2", 0.01d), ("val3", 99.98d)),
 
-//        "str_list" asList(defaultListStrF, genListCountDefault(1, 2)),
-    //    "num_list" asList(defaultListNum, genListCountDefault(1, 2)),
-    //    "bool_list" asList(defaultListBool, genListCountDefault(1, 2)),
+//    (ID_TYPE, NameField) => StringType[ID_TYPE]
+
+//    "str_list" asList[Double](defaultListStr, genListCountDefault(1, 2)),
+//    "num_list" asList(defaultListNum, genListCountDefault(1, 2)),
+//    "bool_list" asList(defaultListBool, genListCountDefault(1, 2)),
 
     //    "str_list_new" asListSimple(defaultListStr, genListCountDefault(6, 8)),
 
