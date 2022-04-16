@@ -1,6 +1,5 @@
-package ru.vood.generator.json.dsl
+package ru.vood.generator.json.custom.dsl
 
-import ru.vood.generator.json.custom.dsl.MapWeight
 import ru.vood.generator.json.custom.service
 import ru.vood.generator.json.custom.service._
 import ru.vood.generator.json.dsl.TypeObject.{GenerateFieldValueFunction, NameField}

@@ -2,7 +2,7 @@ package ru.vood.generator.json.secondVersion
 
 import ru.vood.generator.json.custom.abstraction.AbstractNumberIdentyfydEntity
 import ru.vood.generator.json.custom.service.MetaProperty
-import ru.vood.generator.json.dsl.Predef2Version.{PropAssoc, asEntityProp}
+import ru.vood.generator.json.custom.dsl.Predef2Version.{PropAssoc, asEntityProp}
 import ru.vood.generator.json.custom.service.JsonEntityMeta.asJson
 
 case class JsonData() extends AbstractNumberIdentyfydEntity {
